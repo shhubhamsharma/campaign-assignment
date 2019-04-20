@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
         // reset login status
         this.authenticationService.logout();
-        this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+        this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/dashboard';
     }
 
     // convenience getter for easy access to form fields
