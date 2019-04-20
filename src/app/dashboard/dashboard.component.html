@@ -1,0 +1,77 @@
+<button type="button" class="btn btn-info btn-lg" (click)="openModal()">click to open</button>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Rule name</th>
+        <th>Option</th>
+        <th>Condition</th>
+        <th>Status</th>
+        <th>schedule</th>
+        <th>Action</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of ruleList">
+        <td>{{item.rulename}}</td>
+        <td>{{item.option.join()}}</td>
+        <td>{{item.conditions}}</td>
+        <td>{{item.actions}}</td>
+        <td>{{item.scheduleid}}</td>
+      </tr>
+      </tbody>
+      </table>
+<div class="backdrop" [ngStyle]="{'display':display}"></div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+
+      <div class="modal-header">
+        <h4 class="modal-title">Model Title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span
+            aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <label for="rulename">Rule name</label>
+          <input type="text" class="form-control" name="rulename" [(ngModel)]="campaignModel.rulename">
+        </div>
+        <div class="row">
+          <label for="rulename">Campaign</label>
+          <select [ngModel]="selectcampaign" multiple class="form-control" (ngModelChange)="onChange($event)" [(ngModel)]="campaignModel.option"
+            name="sel2">
+            <option [value]="i.name" *ngFor="let i of campaignsList">{{i.name}}</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="schedule">Schedule</label>
+          <select [ngModel]="selectedSchedule" class="form-control" (ngModelChange)="onChange($event)" [(ngModel)]="campaignModel.scheduleid"
+            placeholder="Select Schedule" name="schedule">
+            <option [value]="i.id" *ngFor="let i of schedules">{{i.text}}</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="condition">Conditions</label>
+          <input type="text" class="form-control" name="condition" [(ngModel)]="campaignModel.conditions">
+        </div>
+        <div class="row">
+          <label for="action">Action</label>
+          <select [ngModel]="selectedSchedule" class="form-control" (ngModelChange)="onChange($event)"
+            placeholder="Select Schedule" name="schedule" [(ngModel)]="campaignModel.actions">
+            <option [value]="i.id" *ngFor="let i of actions">{{i.text}}</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="rulename">Status</label>
+          <input type="checkbox" class="form-control" name="condition" [(ngModel)]="campaignModel.active" [checked]="campaignModel.active==1">
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="submitCampaign()">Save</button>
+        <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
